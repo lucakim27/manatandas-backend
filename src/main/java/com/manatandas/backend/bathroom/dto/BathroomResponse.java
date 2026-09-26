@@ -20,6 +20,7 @@ public class BathroomResponse {
     private Boolean isAccessible;
     private Double rating;
     private String source;
+    private Long submittedByUserId;
     private Instant lastVerifiedAt;
 
     public static BathroomResponse from(Bathroom bathroom) {
@@ -34,6 +35,7 @@ public class BathroomResponse {
             .isAccessible(bathroom.getIsAccessible())
             .rating(bathroom.getRating())
             .source(bathroom.getSource().name())
+            .submittedByUserId(bathroom.getSubmittedBy() == null ? null : bathroom.getSubmittedBy().getId())
             .lastVerifiedAt(bathroom.getLastVerifiedAt())
             .build();
     }

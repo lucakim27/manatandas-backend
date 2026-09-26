@@ -14,4 +14,7 @@ public interface SavedBathroomRepository extends JpaRepository<SavedBathroom, Lo
 
     @Transactional
     void deleteByUserAndBathroom(User user, Bathroom bathroom);
+
+    @Transactional
+    void deleteAllByBathroom(Bathroom bathroom);
 }

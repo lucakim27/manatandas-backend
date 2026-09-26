@@ -1,5 +1,6 @@
 package com.manatandas.backend.bathroom;
 
+import com.manatandas.backend.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -7,6 +8,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -70,8 +74,10 @@ public class Bathroom {
 
     private Instant lastVerifiedAt;
 
-    // Set only when source == USER: the email of the logged-in submitter.
-    private String submittedByEmail;
+    // Null for imported records; set for bathrooms submitted by an account.
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "submitted_by_user_id")
+    private User submittedBy;
 
     public enum Source {
         USER,
