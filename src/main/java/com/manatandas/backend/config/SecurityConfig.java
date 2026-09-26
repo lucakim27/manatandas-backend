@@ -42,6 +42,10 @@ public class SecurityConfig {
                 // cookie to answer "who am I", so it falls through to
                 // anyRequest().authenticated() below.
                 .requestMatchers("/api/auth/google", "/api/auth/logout").permitAll()
+                // Must come before the general GET /api/bathrooms/** rule
+                // below, since Spring Security uses first-match-wins: without
+                // this, /saved would be accidentally public.
+                .requestMatchers(HttpMethod.GET, "/api/bathrooms/saved").authenticated()
                 .requestMatchers(HttpMethod.GET, "/api/bathrooms/**").permitAll()
                 // Bulk imports from OSM etc. stay open for now — this is a
                 // manual dev/admin action, not a user-facing feature yet.
