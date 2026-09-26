@@ -70,6 +70,9 @@ public class Bathroom {
 
     private Instant lastVerifiedAt;
 
+    // Set only when source == USER: the email of the logged-in submitter.
+    private String submittedByEmail;
+
     public enum Source {
         USER,
         OSM,

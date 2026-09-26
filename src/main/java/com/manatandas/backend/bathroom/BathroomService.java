@@ -26,7 +26,7 @@ public class BathroomService {
             .toList();
     }
 
-    public BathroomResponse create(BathroomRequest request) {
+    public BathroomResponse create(BathroomRequest request, String submittedByEmail) {
         Bathroom bathroom = Bathroom.builder()
             .name(request.getName())
             .latitude(request.getLatitude())
@@ -34,6 +34,7 @@ public class BathroomService {
             .address(request.getAddress())
             .accessType(Bathroom.AccessType.PUBLIC)
             .source(Bathroom.Source.USER)
+            .submittedByEmail(submittedByEmail)
             .lastVerifiedAt(Instant.now())
             .build();
 

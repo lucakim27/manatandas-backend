@@ -1,22 +1,10 @@
 package com.manatandas.backend.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-@Configuration
+// Superseded by SecurityConfig, which defines CORS via a
+// CorsConfigurationSource bean instead — Spring Security's filter chain
+// needs CORS declared through its own .cors() configuration, and running
+// both this WebMvcConfigurer-based setup and SecurityConfig at the same
+// time causes the two to conflict. This class is intentionally inert
+// (no @Configuration) and safe to delete.
 public class CorsConfig {
-
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/**")
-                    .allowedOrigins("http://localhost:5173")
-                    .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE");
-            }
-        };
-    }
 }
